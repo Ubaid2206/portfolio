@@ -363,13 +363,18 @@
             <div class="contact_section_2">
                <div class="row">
                   <div class="col-md-12">
-                     <div class="mail_section_1">
-                        <input type="text" class="mail_text" placeholder="Your Name" name="Your Name">
-                        <input type="text" class="mail_text" placeholder="Your Email" name="Your Email">
-                        <input type="text" class="mail_text" placeholder="Your Phone" name="Your Phone">
-                        <textarea class="massage-bt" placeholder="Your Massage" rows="5" id="comment" name="Your Massage"></textarea>
-                        <div class="send_bt"><a href="#">Send Now</a></div>
-                     </div>
+                     <form action="https://api.web3forms.com/submit" method="POST">
+
+                        <div class="mail_section_1">
+                             <input type="hidden" name="access_key" value="9a1da4a1-b960-409d-b2b9-a4f339d5ca4c">
+
+                           <input type="text" class="mail_text" placeholder="Your Name" name="name">
+                           <input type="text" class="mail_text" placeholder="Your Email" name="email">
+   
+                           <textarea class="massage-bt" placeholder="Your Massage" rows="5" id="comment" name="message"></textarea>
+                           <div class="send_bt"><button type="submit">Send Now</button></div>
+                        </div>
+                     </form>
                   </div>
                </div>
             </div>
