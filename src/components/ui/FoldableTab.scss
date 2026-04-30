@@ -1,0 +1,43 @@
+@use '../../assets/scss/index' as *;
+
+.nav-titled {
+  width: 301px;
+  color: $secondary4;
+  position: relative;
+}
+
+@include tablet-to-up {
+  #line {
+    width: 1px;
+    top: 30px;
+    left: 331px;
+    position: fixed;
+    display: inline-block;
+    background: $lines;
+    height: calc($full-viewport-height - 80px);
+  }
+}
+
+.foldable-tab {
+  @include flex-container(row, nowrap, unset, baseline);
+  padding-left: 10px;
+  cursor: pointer;
+  user-select: none;
+
+  @include mobile {
+    background-color: $lines;
+    height: 30px;
+    align-items: center;
+    width: calc($full-viewport-width - 30px);
+  }
+
+  > svg {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease-in-out;
+    padding: 2px;
+    margin: 0 5px 0;
+    @include tablet-to-up { position: relative; top: 4px; }
+  }
+
+  &.is-folded > svg { transform: rotate(90deg); }
+}

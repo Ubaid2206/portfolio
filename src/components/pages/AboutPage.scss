@@ -1,0 +1,237 @@
+@use '../../assets/scss/index' as *;
+
+.about-me {
+  @include mainMiddleSettings;
+
+  @include mobile {
+    @include phone-borders;
+    overflow-y: scroll;
+    padding-bottom: 10dvh;
+  }
+
+  aside {
+    width: 300px;
+    display: flex;
+
+    @include mobile { width: calc($full-viewport-width - 30px); }
+
+    .tab {
+      position: absolute;
+      display: inline-flex;
+      align-items: center;
+      flex-direction: column;
+      height: $full-viewport-height;
+      width: 60px;
+      border-right: 1px solid $lines;
+
+      @include mobile { display: none; }
+
+      img {
+        margin: 10px;
+        cursor: pointer;
+        width: 24px;
+        @include transition-ease;
+
+        &:hover, &.active {
+          filter: brightness(4);
+          opacity: 0.9;
+          @include transition-ease;
+        }
+      }
+    }
+
+    .lists {
+      left: 60px;
+      width: 240px;
+      position: relative;
+      display: inline-block;
+
+      @include mobile { left: 0; }
+
+      .hobbies-bar {
+        margin-left: 30px;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+
+        > p {
+          @include transition-ease;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          padding: 4px 0;
+
+          &:hover, &.active { color: $secondary4; @include transition-ease; }
+        }
+      }
+    }
+  }
+
+  .personal-contact {
+    position: relative;
+    margin-left: 25px;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+
+    @include mobile { width: calc($full-viewport-width - 57px); }
+
+    p {
+      @include transition-ease;
+      margin: 10px;
+      cursor: pointer;
+      width: fit-content;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      @include mobile { width: 100%; }
+
+      &:hover { @include transition-ease; color: $secondary4; }
+    }
+
+    .copied-badge {
+      font-size: 11px;
+      background: $accent1;
+      color: $primary1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+    }
+  }
+}
+
+// About sub-page content
+.about-content {
+  @include tablet-to-up {
+    position: absolute;
+    left: 300px;
+    top: 0;
+    width: calc(100% - 300px);
+    height: calc($full-viewport-height - 180px);
+  }
+}
+
+.split-in-half {
+  @include flex-container(row, nowrap, center, center);
+  width: calc(100% - 300px);
+
+  @include mobile {
+    width: 100%;
+    position: relative;
+    @include flex-container(column, nowrap, unset, unset);
+  }
+
+  @include tablet-to-up {
+    left: 300px;
+    position: absolute;
+    top: 0;
+    height: calc($full-viewport-height - 180px);
+  }
+
+  > * {
+    width: calc(50% - 20px);
+    padding: 0 20px;
+
+    @include mobile { width: 100%; padding: 0 20px; }
+  }
+
+  .personal-bio {
+    height: 50dvh;
+    overflow-y: scroll;
+    cursor: grab;
+    user-select: none;
+    line-height: 1.8;
+
+    @include mobile { height: inherit; cursor: auto; }
+
+    &.grabbing { cursor: grabbing; }
+
+    p { margin-bottom: 12px; }
+
+    .bold-text { font-weight: bold; color: $secondary4; }
+  }
+
+  .code-snippet {
+    border-radius: 40px;
+    overflow-y: auto;
+    max-height: 400px;
+    padding: 20px;
+
+    @include mobile {
+      margin-left: 10px;
+      width: calc($full-viewport-width - 30px);
+    }
+
+    .code-author {
+      @include flex-container(row, nowrap, unset, center);
+
+      .mi-imagen {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid $lines;
+        margin-right: 15px;
+        cursor: pointer;
+        transition: transform 0.3s;
+        &:hover { transform: scale(1.1); }
+      }
+
+      .auth-aside {
+        p:first-child { color: $gradients1; font-weight: bold; }
+        p { margin: 5px 0; }
+      }
+    }
+
+    .code-block {
+      background-color: $code-snippets-bg;
+      border-radius: 15px;
+      padding: 16px;
+      margin: 20px 0;
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-x: auto;
+      color: $accent1;
+      font-family: $main-font;
+    }
+  }
+}
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+.hobbies-info,
+.professional-info {
+  @include flex-container(row, nowrap, center, center);
+  height: calc($full-viewport-height - 180px);
+  text-align: center;
+
+  @include mobile { height: auto; padding: 40px 20px; }
+
+  > div, > * {
+    color: $secondary1;
+    h2 { font-size: 28px; color: $secondary4; margin-bottom: 16px; }
+    p { color: $secondary2; line-height: 1.7; }
+  }
+
+  .hobbies-placeholder {
+    max-width: 400px;
+  }
+}

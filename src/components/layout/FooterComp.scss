@@ -1,0 +1,146 @@
+@use '../../assets/scss/index' as *;
+
+footer {
+  position: relative;
+  font-family: $main-font;
+  height: 60px;
+  background-color: $primary2;
+  border: 1px solid $lines;
+  border-radius: 0 0 5px 5px;
+
+  .container {
+    display: flex;
+    background-color: inherit;
+    height: 100%;
+    line-height: 1.6;
+    width: 100%;
+    align-items: center;
+
+    > p:first-of-type {
+      margin-left: 20px;
+      margin-right: 20px;
+      color: $secondary1;
+      user-select: none;
+    }
+
+    .social {
+      @include flex-container(row, unset, unset, center);
+
+      & > * {
+        width: 60px;
+        height: 60px;
+        position: relative;
+        text-align: center;
+        border: 1px solid $lines;
+
+        &:hover {
+          background-color: $primary1-hovered;
+          svg { color: $light-primary3; }
+        }
+      }
+
+      .telegram, .facebook {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        color: $secondary1;
+      }
+    }
+
+    .terms-services-container {
+      @include flex-container(row, unset, space-around, center);
+      position: absolute;
+      right: 170px;
+      width: 55px;
+      height: 55px;
+      cursor: pointer;
+      color: $secondary1;
+
+      > div {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: $primary2;
+        border: 1px solid $lines;
+        border-radius: 5px;
+        padding: 5px 10px;
+        white-space: nowrap;
+        z-index: 100;
+        margin-bottom: 5px;
+
+        @include mobile {
+          right: -40px;
+          left: auto;
+          transform: none;
+        }
+      }
+
+      .link {
+        color: $secondary1;
+        text-decoration: none;
+        &:hover { color: $secondary4; }
+      }
+    }
+
+    .github {
+      cursor: pointer;
+      position: absolute;
+      right: 0;
+      width: 170px;
+      @include flex-container(row, unset, flex-end, center);
+      border-left: solid 1px $lines;
+      color: $secondary1;
+      padding-right: 10px;
+      height: 60px;
+
+      &:hover {
+        background-color: $primary1-hovered;
+        p, svg { color: $light-primary3; }
+      }
+
+      p {
+        user-select: none;
+        margin-left: 5px;
+        padding-right: 5px;
+      }
+
+      a {
+        color: $secondary1;
+        display: flex;
+        align-items: center;
+        margin-top: 5px;
+      }
+
+      @include mobile {
+        width: 60px;
+        border: none;
+        padding-left: 25px;
+        justify-content: center;
+        p { display: none; }
+      }
+    }
+
+    .link {
+      position: relative;
+      padding: 15px 10px;
+    }
+
+    @include mobile {
+      width: calc(100% - 60px);
+      justify-content: flex-end;
+      p { flex: 1; }
+      .github { margin-right: 5px; }
+    }
+  }
+
+  @include mobile { display: none; }
+}

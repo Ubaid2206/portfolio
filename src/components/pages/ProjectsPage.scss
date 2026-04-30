@@ -1,0 +1,10 @@
+@use '../../assets/scss/index' as *;
+
+.projects {
+  overflow-y: scroll !important;
+  @include mainMiddleSettings;
+
+  @include mobile {
+    @include phone-borders;
+  }
+}

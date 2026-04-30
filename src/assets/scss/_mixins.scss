@@ -1,0 +1,132 @@
+@use './variables' as *;
+@mixin list-reset {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+@mixin circle($dimensions) {
+  border-radius: 50%;
+  width: $dimensions;
+  height: $dimensions;
+}
+
+@mixin main-padding($pTop: 100px, $pBottom: 100px) {
+  padding-top: $pTop;
+  padding-bottom: $pBottom;
+  position: relative;
+}
+@mixin grid-minmax-auto-filled($min: 300px, $max: 1fr, $gap: 40px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min, $max));
+  gap: $gap;
+}
+@mixin middle-me($position: absolute) {
+  position: $position;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*//! ===============================================  */
+/*//? ================== Portfolio ==================  */
+/*//! ===============================================  */
+
+@mixin mainMiddleSettings() {
+  font-family: $main-font;
+  position: relative;
+  background-color: $primary2;
+  border-left: 1px solid $lines;
+  border-right: 1px solid $lines;
+  border-top: 1px solid $lines;
+  & {
+    @media (max-width: 768px) {
+      height: calc($full-viewport-height - 90px);
+    }
+  }
+  & {
+    @media (min-width: 768px) {
+      // height: calc($full-viewport-height - 180px);
+      // height: calc(100% - 180px);
+      overflow: hidden;
+    }
+    @media (min-width: 769px) {
+      height: calc($full-viewport-height - 180px);
+    }
+  }
+}
+
+@mixin transition-ease {
+  // transition: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  transition: all 0.5s ease-in-out;
+}
+
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content; // This allows you to pass in styles
+  }
+}
+
+// Mixin for Tablets
+@mixin tablet {
+  @media screen and (min-width: 769px) and (max-width: 1024px) {
+    @content; // This allows you to pass in styles
+  }
+}
+
+// Mixin for Small PCs / Laptops
+@mixin small-pc {
+  @media screen and (min-width: 1025px) and (max-width: 1440px) {
+    @content; // This allows you to pass in styles
+  }
+}
+
+// Mixin for Large PCs / Desktops
+@mixin large-pc {
+  @media screen and (min-width: 1441px) {
+    @content; // This allows you to pass in styles
+  }
+}
+
+@mixin tablet-to-up {
+  @media screen and (min-width: 769px) {
+    @content; // This allows you to pass in styles
+  }
+}
+
+/* 
+.example {
+  @include mobile {
+    font-size: 14px; // Mobile-specific styles
+  }
+
+  @include tablet {
+    font-size: 18px; // Tablet-specific styles
+  }
+}
+*/
+
+@mixin flex-container($direction: row, $wrap: nowrap, $justify: flex-start, $align: stretch) {
+  display: flex;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+/*
+border-radius: 0 0 5px 5px;
+&:not(.phone-body) {
+  border-bottom: 1px solid $lines; //Need to be fixed! 🤦‍♀️
+}
+*/
+
+@mixin viewsRadius {
+}
+@mixin phone-borders {
+  border-top: 1px solid $lines !important;
+  border-right: 1px solid $lines;
+  border-bottom: 1px solid $lines;
+  border-left: 1px solid $lines;
+  border-radius: 0 0 5px 5px;
+  overflow: hidden;
+}

@@ -1,0 +1,113 @@
+@use '../../assets/scss/index' as *;
+
+.home {
+  overflow: visible !important;
+  padding: 50px;
+  @include mainMiddleSettings;
+
+  @include mobile {
+    @include phone-borders;
+    overflow: visible !important;
+    height: calc($full-viewport-height - 95px);
+  }
+
+  @media screen and (max-height: 668px) {
+    padding: 15px;
+  }
+
+  .container {
+    @include flex-container(row, nowrap, unset, center);
+    height: 100%;
+    background-color: inherit;
+
+    @include mobile {
+      width: 80%;
+      margin: auto;
+    }
+
+    h1 {
+      color: $secondary4;
+      font-size: $headline-size;
+      line-height: calc($headline-size / 2);
+      padding: 10px 0;
+
+      @media screen and (max-height: 668px) { font-size: calc($headline-size - 5px); }
+      @media screen and (max-width: 1024px) { font-size: calc($headline-size * 0.6); }
+
+      @include mobile {
+        font-size: $headline-size !important;
+        line-height: 1.2;
+        font-weight: normal;
+        margin: 20px 0;
+      }
+    }
+
+    section {
+      @include tablet-to-up { margin-right: 10%; }
+
+      @media screen and (max-height: 668px) { transform: scale(0.9); }
+
+      > p { color: $secondary1; }
+
+      .info {
+        .role {
+          color: $secondary3;
+          font-size: $sub-headline-size;
+          margin-bottom: 100px;
+
+          @include mobile {
+            margin-bottom: 10px;
+            font-size: $body-text-size * 1.5;
+            margin-top: 0;
+          }
+
+          @media (max-width: 1024px) { font-size: $body-text-size; }
+          @media screen and (max-height: 668px) { font-size: calc($body-text-size * 0.8); margin-bottom: 0; }
+        }
+
+        .greeting {
+          @include mobile { font-size: $sub-headline-size * 0.8; }
+          @media screen and (max-width: 1024px) { font-size: $sub-headline-size * 0.7; }
+        }
+      }
+
+      .task {
+        > p {
+          font-size: $body-text-size;
+          color: $secondary1;
+        }
+        @include mobile { display: none; }
+      }
+
+      .github-repo {
+        p {
+          color: $secondary1;
+          line-height: 1.7;
+          width: 300px;
+          @include tablet-to-up { display: none; }
+        }
+
+        span {
+          color: $accent4;
+          &:nth-of-type(2) { color: $secondary3; margin: 0 5px; }
+        }
+
+        em { color: $accent5; }
+
+        .external-link {
+          position: relative;
+          left: 10px;
+          color: $accent1;
+          text-decoration: none;
+          &:hover { text-decoration: underline; }
+        }
+
+        @include mobile { font-size: $sub-headline-size * 0.6; }
+      }
+    }
+
+    aside {
+      @include mobile { display: none; }
+    }
+  }
+}

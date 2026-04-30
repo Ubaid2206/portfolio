@@ -1,0 +1,148 @@
+@use '../../assets/scss/index' as *;
+
+.empty-message {
+  color: $accent1;
+  border-radius: 25px;
+  background: #181818;
+
+  @include mobile {
+    box-shadow: 0 0 20px 7px #ffffff12;
+    width: calc(100% - 20px);
+    margin: auto;
+    text-align: center;
+    line-height: 1.5;
+    font-size: 26px;
+    padding: 10px;
+  }
+
+  p {
+    @include tablet-to-up {
+      position: absolute;
+      width: calc(100% - 300px);
+      max-width: 1000px;
+      font-size: 36px;
+      margin: 0 50px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.filtered-projects {
+  gap: 20px;
+  left: 350px;
+  position: absolute;
+  top: 100px;
+  overflow: hidden;
+  padding-bottom: 100px;
+  @include flex-container(unset, wrap, unset, unset);
+
+  @include mobile {
+    width: calc($full-viewport-width - 30px);
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    position: relative;
+  }
+
+  @include tablet {
+    width: calc($full-viewport-width - 460px);
+    @include flex-container(row, wrap, space-evenly, stretch);
+    align-content: center;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1200px) {
+    width: calc($full-viewport-width - 430px);
+  }
+
+  @media (min-width: 1200px) {
+    .project-card { flex-basis: calc(50% - 10px); }
+  }
+
+  @media (min-width: 1430px) {
+    .project-card { flex-basis: calc(33% - 10px); }
+  }
+
+  .project-card {
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    perspective: 1000px;
+
+    .card-title {
+      font-size: $body-text-size;
+      transition: all 0.5s ease-in-out;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .card-content {
+      background-color: $code-snippets-bg;
+      border-radius: 25px;
+      border: 1px solid $lines;
+      transform-style: preserve-3d;
+      transition: all 0.5s ease-in-out;
+      overflow: hidden;
+
+      p {
+        text-align: left;
+        padding: 20px 20px 0 20px;
+        margin-bottom: 40px;
+        transition: all 0.5s ease-in-out;
+        transform: translate3d(0, 0, 20px) scale(1);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 10px;
+        border-radius: 10px 10px 0 0;
+        min-width: 200px;
+        min-height: 200px;
+        background: $primary3;
+        transition: all 0.5s ease-in-out;
+        transform: translate3d(0, 0, 40px);
+      }
+
+      .project-link {
+        bottom: 0;
+        left: 20px;
+        position: relative;
+        margin: 20px 0;
+        display: inline-block;
+        transition: all 0.5s ease-in-out;
+        transform: translate3d(0, 0, 10px);
+
+        .btn-view {
+          background-color: transparent;
+          border: 1px solid $secondary1;
+          color: $secondary1;
+          padding: 8px 20px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-family: $main-font;
+          font-size: $body-text-size;
+          transition: all 0.3s;
+
+          &:hover {
+            border-color: $secondary4;
+            color: $secondary4;
+          }
+        }
+      }
+
+      &:hover {
+        transform: rotate3d(0.5, 1, 0, 30deg);
+
+        img { transform: translate3d(0, 0, 60px) scale(1.1); }
+        p { transform: translate3d(0, 0, 10px) scale(0.9); }
+        .project-link { transform: translate3d(0, 0, 40px); }
+      }
+    }
+
+    &:hover .card-title {
+      transform: translate3d(0, 0, 50px);
+    }
+  }
+}

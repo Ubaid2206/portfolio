@@ -1,0 +1,53 @@
+@use './index' as *;
+@use './variables' as *;
+@use 'sass:map';
+
+/* Global Rules */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'cairo', sans-serif; background-color: $primary1; color: $secondary1; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; padding: 0; margin: 0; }
+
+@include mobile {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -ms-tap-highlight-color: transparent;
+  }
+}
+
+/* screen sizes */
+@media (min-width: 768px) { .container { width: 750px; } }
+@media (min-width: 992px) { .container { width: 970px; } }
+@media (min-width: 1200px) { .container { width: 1170px; } }
+
+/* Custom scrollbar styles */
+@include mobile {
+  ::-webkit-scrollbar { color: transparent; }
+}
+
+@include tablet-to-up {
+  ::-webkit-scrollbar { width: 20px; }
+  ::-webkit-scrollbar-track { background: $primary2; }
+  ::-webkit-scrollbar-thumb {
+    background: rgba($primary2, 0.8);
+    border-left: 1px solid $lines;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba($primary2, 0.6); }
+}
+
+/* custom selection */
+::selection {
+  color: $primary1;
+  background-color: $accent1;
+  font-weight: bold;
+}
+
+/* Page wrapper */
+#root {
+  margin: 30px;
+  font-family: $main-font;
+  min-height: calc(100dvh - 60px);
+
+  @include mobile { margin: 15px; }
+}
