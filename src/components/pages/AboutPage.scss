@@ -199,8 +199,16 @@
       font-size: 13px;
       line-height: 1.5;
       overflow-x: auto;
-      color: $accent1;
       font-family: $main-font;
+
+      .hl-keyword { color: #c792ea; }
+      .hl-string  { color: #c3e88d; }
+      .hl-comment { color: #546e7a; font-style: italic; }
+      .hl-fn      { color: #82aaff; }
+      .hl-number  { color: #f78c6c; }
+      .hl-literal { color: #ff9cac; }
+      .hl-punct   { color: #89ddff; }
+      .hl-plain   { color: $accent1; }
     }
   }
 }

@@ -42,19 +42,45 @@ const INTERESTS = [
 const EDUCATION = [
   {
     tag: 'high-school',
-    title: 'Matric / High School',
-    institute: 'Government High School',
-    year: '2020',
+    title: 'Matric',
+    institute: 'Al Badar Higher Secondary School',
+    year: '2022',
     detail: 'Completed matriculation with focus on science subjects.',
   },
   {
-    tag: 'university',
-    title: 'BS Software Engineering',
-    institute: 'University of Engineering & Technology',
-    year: '2022 – Present',
-    detail: 'Currently pursuing BS in Software Engineering, specializing in web and mobile development.',
+    tag: 'high-school',
+    title: 'Intermediate',
+    institute: 'KMC Government College',
+    year: '2025',
+    detail: 'Completed Intermediate with focus on science subjects.',
+  },
+  {
+    tag: 'University',
+    title: 'ADSE Advanced Diploma in Software Engineering',
+    institute: 'Aptech Computer Education',
+    year: '2022 – 2025',
+    detail: 'Currently pursuing ADSE in Software Engineering, specializing in web and mobile development.',
   },
 ]
+
+function highlightJS(code: string) {
+  const tokens: { type: string; value: string }[] = []
+  const re = /(\/\/.*)|('(?:\\'|[^'])*'|`(?:\\`|[^`])*`)|(\b(?:const|let|var|return|function|=>|if|else|new|typeof|of|in)\b)|(\b(?:true|false|null|undefined|NaN|Infinity)\b)|(\b[A-Za-z_$][\w$]*(?=\s*\())|([0-9]+(?:\.[0-9]+)?)|([(){}\[\].,;:?])/g
+  let last = 0, m
+  while ((m = re.exec(code)) !== null) {
+    if (m.index > last) tokens.push({ type: 'plain', value: code.slice(last, m.index) })
+    if (m[1]) tokens.push({ type: 'comment', value: m[0] })
+    else if (m[2]) tokens.push({ type: 'string', value: m[0] })
+    else if (m[3]) tokens.push({ type: 'keyword', value: m[0] })
+    else if (m[4]) tokens.push({ type: 'literal', value: m[0] })
+    else if (m[5]) tokens.push({ type: 'fn', value: m[0] })
+    else if (m[6]) tokens.push({ type: 'number', value: m[0] })
+    else tokens.push({ type: 'punct', value: m[0] })
+    last = m.index + m[0].length
+  }
+  if (last < code.length) tokens.push({ type: 'plain', value: code.slice(last) })
+  return tokens.map((t, i) => <span key={i} className={`hl-${t.type}`}>{t.value}</span>)
+}
 
 function parseBio(text: string) {
   return text.split('\n').map((line, li) => {
@@ -237,7 +263,7 @@ export default function AboutPage() {
               {activeTab === 'University' && (
                 <div className="tab-section">
                   <p className="tab-heading">// university</p>
-                  {EDUCATION.filter(e => e.tag === 'university').map((edu, i) => (
+                  {EDUCATION.filter(e => e.tag === 'University').map((edu, i) => (
                     <div key={i} className="edu-card">
                       <p className="edu-year">{edu.year}</p>
                       <p className="edu-title">{edu.title}</p>
@@ -265,7 +291,9 @@ export default function AboutPage() {
                 </div>
               </div>
               <pre className="code-block">
-                <code className="language-javascript">{CODE_SNIPPET}</code>
+                <code className="language-javascript">
+                  {highlightJS(CODE_SNIPPET)}
+                </code>
               </pre>
             </div>
 
